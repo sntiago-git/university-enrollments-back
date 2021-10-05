@@ -1,0 +1,23 @@
+* como administrativo 
+  quisiera tener acceso a los datos del estudiante
+  para actualizar o modificar errores en los mismos
+
+* como administrativo 
+  quisiera tener acceso a las notas y materias del estudiante
+  para actualizar o modificar su semestre
+
+* como administrativo 
+  quisiera tener acceso a las notas del estudiante
+  para actualizar o modificar errores en las mismas
+
+* como administrativo 
+  quisiera tener acceso al promedio del estudiante
+  para observar si el estudiante reprueba o aprueba las materias
+
+* como administrativo 
+  quisiera tener acceso al correo electronico del estudiante
+  para enviarle informacion de la universidad
+
+* como administrativo 
+  quisiera tener acceso a los datos del estudiante
+  para saber si se ha retirado de la universidad
