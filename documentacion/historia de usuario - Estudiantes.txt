@@ -1,0 +1,38 @@
+*	como estudiante
+	quisiera registrarme en la plataforma
+	para quedar registrado en la universidad como estudiante
+
+* 	como estudiante
+	quisiera poder loguearme 
+	para poder ingresar al area de matricula
+
+*	como estudiante 
+	quisiera poder ingresar los datos necesario
+	para poder formalizar mi matricula
+
+*	como estudiante 
+	quisiera agregar materias
+	para mi sementre
+
+*	como estudiante
+	quisiera poder ver mis notas
+	para verificar el estado de mi progreso en cada materia durante el semestre
+
+*	como estudiante
+	quisiera poder ver mi promedio 
+	para verificar mi calidad en el semestre
+
+*	como estudiante
+	quisiera poder ver mis datos personales
+	para verificar los datos
+
+*	como estudiante
+	quisiera poder actualizar mis datos personales
+	para estar actualizado en la base de datos de la universidad
+
+*	como estudiante
+	quisiera poder retirarme de la universidad
+	para terminar el vinculo con la universidad
+
+	
+
