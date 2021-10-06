@@ -62,6 +62,9 @@ REST_FRAMEWORK = {
     ),
 }
 
+#Actualizarmos el usuario auth
+AUTH_USER_MODEL = 'universityApp.Student'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
