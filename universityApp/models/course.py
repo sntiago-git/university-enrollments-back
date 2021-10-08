@@ -9,6 +9,6 @@ class Course(models.Model):
     long_desc = models.TextField("Long_desc", max_length=300)
     schedule = models.TextField("Schedule", max_length=300)
     semester = models.CharField("Semester", max_length=20)
-    credits = models.IntegerField("Credits", max_length=10)
+    credits = models.IntegerField("Credits")
     teacher = models.ForeignKey(
         Teacher, related_name="course", on_delete=models.CASCADE)
