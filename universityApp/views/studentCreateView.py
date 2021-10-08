@@ -8,7 +8,7 @@ class StudentCreateView(views.APIView):
 
     def post(self, request, *args, **kwargs):
 
-        serializer = StudentSerializer(data=request.data)
+        serializer = StudentSerializer(data=request.data) #Se crea el estudiante mediante su serializador, le pasamos la data del request.
         serializer.is_valid(raise_exception=True)
         serializer.save()
         tokenData = {"id": request.data["id"],

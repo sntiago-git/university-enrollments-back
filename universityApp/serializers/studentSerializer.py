@@ -29,12 +29,12 @@ class StudentSerializer(serializers.ModelSerializer):
         career_instance, created = Career.objects.get_or_create(name=career) 
         
         if(created):
-            print("La Carrera: ", career_instance.__str__(), " ha sido creada en Base de datos.")
+            print("La Carrera:", career_instance.__str__(), "ha sido creada en Base de datos.")
 
         #Se crea el nuevo objeto estudiante junto a su objeto career
         student_instance = Student.objects.create(**validated_data, career=career_instance)
 
-        print("El Estudiante: ", student_instance.__str__(), " ha sido creado en Base de datos.")
+        print("El Estudiante:", student_instance.__str__(), "ha sido creado en Base de datos.")
 
         return student_instance
    

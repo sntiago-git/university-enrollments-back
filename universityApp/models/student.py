@@ -56,4 +56,4 @@ class Student(AbstractBaseUser, PermissionsMixin):
         """
         Cadena para representar el objeto (Student)
         """
-        return self.id + " " + self.name + " " + self.lastname + " - " + self.career.__str__
+        return str(self.id) + " - " + self.name + " " + self.lastname + " - " + self.career.__str__()
