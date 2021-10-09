@@ -32,13 +32,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
     'universityApp',
 ]
 
@@ -53,14 +53,18 @@ SIMPLE_JWT={
     'USER_ID_CLAIM':'user_id',
 }
 
+
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES':(
-    'rest_framework.permission.AllowAny',
+    'DEFAULT_PERMISSION_CLASSES': (
+    'rest_framework.permissions.AllowAny',
     ),
-    'DEFAULT_AUTHENTICATION_CLASSES':(
+    'DEFAULT_AUTHENTICATION_CLASSES': (
     'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
+    )
 }
+
+#Actualizarmos el usuario auth
+AUTH_USER_MODEL = 'universityApp.Student'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -15,7 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.urls.conf import include
+
+
+from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView)
+from universityApp import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+path('login/', TokenObtainPairView.as_view()),
+path('refresh/', TokenRefreshView.as_view()),
+path('student/', views.studentCreateView.StudentCreateView.as_view()),
 ]
+
