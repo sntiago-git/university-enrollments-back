@@ -17,13 +17,15 @@ from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
 
-
 from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView)
 from universityApp import views
 
 urlpatterns = [
 path('login/', TokenObtainPairView.as_view()),
 path('refresh/', TokenRefreshView.as_view()),
-path('student/', views.studentCreateView.StudentCreateView.as_view()),
+path('student/', views.studentView.StudentCreateView.as_view()),
+path('course/', views.courseView.CourseCreateView.as_view()),
+path('teacher/', views.teacherView.TeacherCreateView.as_view()),
+
 ]
 
