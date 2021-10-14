@@ -38,7 +38,7 @@ class StudentSerializer(serializers.ModelSerializer):
 
         return student_instance
    
-
+    ''' 
     def to_representation(self, obj):
 
         student = Student.objects.get(id=obj.id)
@@ -57,3 +57,4 @@ class StudentSerializer(serializers.ModelSerializer):
                 'name': career.name,
             }
         }
+    '''

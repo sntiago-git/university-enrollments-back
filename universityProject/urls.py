@@ -24,8 +24,11 @@ urlpatterns = [
 path('login/', TokenObtainPairView.as_view()),
 path('refresh/', TokenRefreshView.as_view()),
 path('student/', views.studentView.StudentCreateView.as_view()),
-path('course/', views.courseView.CourseCreateView.as_view()),
-path('teacher/', views.teacherView.TeacherCreateView.as_view()),
 
+path('teacher/', views.teacherView.TeacherCreateView.as_view()),
+path('enrollment/', views.enrollmentView.EnrollmentView.as_view()),
+path('student/<int:pk>/', views.studentView.StudentCreateView.as_view()),
+
+path('course/', include('universityApp.views.course.router')),
 ]
 

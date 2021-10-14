@@ -51,9 +51,4 @@ class Student(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()  # objeto de la clase usermanager, atributo de la clase user()
     USERNAME_FIELD = 'id'
 
-    def __str__(self):
-        
-        """
-        Cadena para representar el objeto (Student)
-        """
-        return str(self.id) + " - " + self.name + " " + self.lastname + " - " + self.career.__str__()
+    
