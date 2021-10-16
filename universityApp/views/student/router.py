@@ -1,5 +1,5 @@
 from rest_framework import routers
-from universityApp.views.student.studentView import StudentViewSet, StudentsByCourse
+from universityApp.views.student.student_views import StudentViewSet, StudentsByCourse
 
 router = routers.SimpleRouter()
 

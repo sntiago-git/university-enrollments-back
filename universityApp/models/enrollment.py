@@ -9,5 +9,6 @@ class Enrollment(models.Model):
         Student, on_delete=models.CASCADE)
     course = models.ForeignKey(
         Course, on_delete=models.CASCADE)
-    date_joined = models.DateField("Date_joined")
+    date_joined = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     

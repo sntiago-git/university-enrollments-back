@@ -1,7 +1,6 @@
 from rest_framework import serializers
-from ..models.student import Student
-from ..models.career import Career
-from ..serializers.careerSerializer import CareerSerializer
+from universityApp.models.student import Student
+from universityApp.models.career import Career
 
 
 class StudentSerializer(serializers.ModelSerializer):

@@ -1,12 +1,11 @@
-
 from rest_framework import status, viewsets
 from rest_framework.response import Response
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from universityApp.serializers.studentSerializer import StudentSerializer
-from universityApp.models.student import Student
 from rest_framework_simplejwt.backends import TokenBackend
 from django.conf import settings
+from universityApp.serializers.studentSerializer import StudentSerializer
+from universityApp.models import Student
 
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 
@@ -59,7 +58,7 @@ class StudentViewSet(viewsets.ModelViewSet):
             stringResponse = {'detail': 'Unauthorized Request'}
             return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
 
-        #Respondemos la lista de Estudiantes
+        #Respondemos los datos del estudiante autenticado.
         data = self.get_serializer(Student.objects.filter(id = valid_data['user_id']), many=True)
         return Response(data.data, status=status.HTTP_200_OK)
         

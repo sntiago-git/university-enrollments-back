@@ -51,9 +51,8 @@ urlpatterns = [
     #path('student/<int:pk>/', views.studentView.StudentCreateView.as_view()),
 
     path('teacher/', views.teacherView.TeacherCreateView.as_view()),
-    path('enrollment/', views.enrollmentView.EnrollmentView.as_view()),
-    
 
+    path('enrollments/', include('universityApp.views.enrollment.router')),
     path('students/', include('universityApp.views.student.router')),
     path('courses/', include('universityApp.views.course.router')),
 
