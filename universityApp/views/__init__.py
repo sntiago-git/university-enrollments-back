@@ -1,1 +1,2 @@
-from . import studentCreateView
+from . import teacherView
+

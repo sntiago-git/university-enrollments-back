@@ -1,7 +1,6 @@
 from rest_framework import serializers
-from ..models.student import Student
-from ..models.career import Career
-from ..serializers.careerSerializer import CareerSerializer
+from universityApp.models.student import Student
+from universityApp.models.career import Career
 
 
 class StudentSerializer(serializers.ModelSerializer):
@@ -38,7 +37,7 @@ class StudentSerializer(serializers.ModelSerializer):
 
         return student_instance
    
-
+    ''' 
     def to_representation(self, obj):
 
         student = Student.objects.get(id=obj.id)
@@ -57,3 +56,4 @@ class StudentSerializer(serializers.ModelSerializer):
                 'name': career.name,
             }
         }
+    '''

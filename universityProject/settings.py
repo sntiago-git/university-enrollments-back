@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import django_heroku
 from pathlib import Path
 from datetime import timedelta
 
@@ -38,32 +39,34 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles',  # required for serving swagger ui's css/js files
+    'drf_yasg',
     'universityApp',
+    'corsheaders',
 ]
 
-SIMPLE_JWT={
-    'ACCESS_TOKEN_LIFETIME':timedelta(minutes=5),
-    'REFRESH_TOKEN_LIFETIME':timedelta(days=1),
-    'ROTATE_REFRESH_TOKEN':False,
-    'BLACKLIST_AFTER_ROTATION':True,
-    'UPDATE_LAST_LOGIN':False,
-    'ALGORITHM':'HS256',
-    'USER_ID_FIELD':'id',
-    'USER_ID_CLAIM':'user_id',
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=5),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKEN': False,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'UPDATE_LAST_LOGIN': False,
+    'ALGORITHM': 'HS256',
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
 }
 
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
-    'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.AllowAny',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-    'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
 
-#Actualizarmos el usuario auth
+# Actualizarmos el usuario auth
 AUTH_USER_MODEL = 'universityApp.Student'
 
 MIDDLEWARE = [
@@ -74,6 +77,17 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+]
+
+# CONFIGURACIÓN DE LOS CORS.
+# Origenes.
+
+CORS_ALLOWED_ORIGINS = [
+    "https://example.com",
+    "https://sub.example.com",
+    "http://localhost:8080",
+    "http://127.0.0.1:9000",
 ]
 
 ROOT_URLCONF = 'universityProject.urls'
@@ -104,10 +118,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'd7eqdkepv1v15h',
-        'USER':'mbccslijpdiaox',
-        'PASSWORD':'b88b6fa4d9b37e0a794cd0b97502913381a0b01d879a3aa367c6ec75f1d51a3c',
-        'HOST':'ec2-52-7-228-45.compute-1.amazonaws.com',
-        'PORT':'5432',
+        'USER': 'mbccslijpdiaox',
+        'PASSWORD': 'b88b6fa4d9b37e0a794cd0b97502913381a0b01d879a3aa367c6ec75f1d51a3c',
+        'HOST': 'ec2-52-7-228-45.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -156,6 +170,5 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-#Configuracion de django para heroku.
-import django_heroku
+# Configuracion de django para heroku.
 django_heroku.settings(locals())
