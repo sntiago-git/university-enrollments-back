@@ -13,3 +13,9 @@ class TeacherCreateView(views.APIView):
         serializer.save()
 
         return Response(status=status.HTTP_201_CREATED)
+        
+    def get(self, request):
+
+        teachers = teacher.objects.all()
+        serializer = TeacherSerializer(teacher, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
