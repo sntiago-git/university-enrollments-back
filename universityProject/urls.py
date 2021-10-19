@@ -33,7 +33,7 @@ schema_view = get_schema_view(
     openapi.Info(
         title="Endpoints University Project",
         default_version='v1',
-        description="Documentaci√≥n de Endpoints, Proyecto Universidad - Gestion de matriculas. P36 - Grupo 3",
+        description="Documentación de Endpoints, Proyecto Universidad - Gestion de matriculas. P36 - Grupo 3",
         terms_of_service="https://www.google.com/policies/terms/",
         contact=openapi.Contact(email="sntiagomeneses@gmail.com"),
         license=openapi.License(name="BSD License"),
@@ -51,6 +51,7 @@ urlpatterns = [
     #path('student/<int:pk>/', views.studentView.StudentCreateView.as_view()),
 
     path('teacher/', views.teacherView.TeacherCreateView.as_view()),
+    path('career/', views.careerView.CareerCreateView.as_view()),
 
     path('enrollments/', include('universityApp.views.enrollment.router')),
     path('students/', include('universityApp.views.student.router')),
