@@ -19,4 +19,4 @@ class CareerCreateView(views.APIView):
 
         careers = Career.objects.all()
         serializer = CareerSerializer(careers, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK) 
