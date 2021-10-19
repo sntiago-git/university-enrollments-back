@@ -13,3 +13,9 @@ class CareerCreateView(views.APIView):
         serializer.save()
 
         return Response(status=status.HTTP_201_CREATED)
+        
+    def get(self, request):
+
+        careers = career.objects.all()
+        serializer = CareerSerializer(careers, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
