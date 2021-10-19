@@ -2,6 +2,7 @@ from rest_framework import status, views
 from rest_framework.response import Response
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from ..serializers.careerSerializer import CareerSerializer
+from universityApp.models import Career
 
 
 class CareerCreateView(views.APIView):
@@ -16,6 +17,6 @@ class CareerCreateView(views.APIView):
         
     def get(self, request):
 
-        careers = career.objects.all()
+        careers = Career.objects.all()
         serializer = CareerSerializer(careers, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

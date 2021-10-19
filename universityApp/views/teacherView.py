@@ -2,6 +2,7 @@ from rest_framework import status, views
 from rest_framework.response import Response
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from ..serializers.teacherSerializer import TeacherSerializer
+from universityApp.models import Teacher
 
 
 class TeacherCreateView(views.APIView):
@@ -16,6 +17,6 @@ class TeacherCreateView(views.APIView):
         
     def get(self, request):
 
-        teachers = teacher.objects.all()
-        serializer = TeacherSerializer(teacher, many=True)
+        teachers = Teacher.objects.all()
+        serializer = TeacherSerializer(teachers, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
