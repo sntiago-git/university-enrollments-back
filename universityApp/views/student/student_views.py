@@ -35,12 +35,6 @@ class StudentViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
 
         # Se crea el estudiante mediante su serializador, le pasamos la data del request.
-        password = request.data.password
-        confirm_password = password = request.data.confirm_password
-
-        if confirm_password != password: 
-            stringResponse = {'detail': 'Password dont match'}
-            return Response(stringResponse, status=status.HTTP_400_BAD_REQUEST)
 
         serializer = StudentSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
