@@ -47,7 +47,7 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', TokenObtainPairView.as_view()),
+    path('login/', views.loginView.TokenObtainPairView.as_view()), #Usamos la nueva vista login personalizada
     path('refresh/', TokenRefreshView.as_view()),
     
     path('teacher/', views.teacherView.TeacherCreateView.as_view()),
