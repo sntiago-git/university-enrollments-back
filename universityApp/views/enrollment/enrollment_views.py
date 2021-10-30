@@ -78,9 +78,9 @@ class EnrollmentViewSet(viewsets.ModelViewSet):
                               'student: ': valid_data['user_id'],
                               'course: ': pk}
             return Response(stringResponse, status=status.HTTP_200_OK)
-
-        stringResponse = {'detail': 'Student is not enrolled in that course'}
-        return Response(stringResponse, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            stringResponse = {'detail': 'Student is not enrolled in that course'}
+            return Response(stringResponse, status=status.HTTP_400_BAD_REQUEST)
 
 
 ''' 
