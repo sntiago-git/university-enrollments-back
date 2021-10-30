@@ -6,7 +6,7 @@ from rest_framework_simplejwt.backends import TokenBackend
 from django.conf import settings
 
 from universityApp.serializers.enrollmentSerializer import EnrollmentSerializer
-from universityApp.models import Enrollment, Course
+from universityApp.models import Enrollment, Course, course
 
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 
@@ -71,9 +71,10 @@ class EnrollmentViewSet(viewsets.ModelViewSet):
         valid_data = tokenBackend.decode(token, verify=False)
 
         course_instance = Course.objects.get(id=pk)
-        print(course_instance.students.remove(valid_data['user_id']))
 
-        if (course_instance.students.remove(valid_data['user_id'])):
+        if(Course.objects.filter(students = valid_data['user_id']).exists()):
+
+            course_instance.students.remove(valid_data['user_id'])
             stringResponse = {'detail': 'Student is not logger in that course',
                               'student: ': valid_data['user_id'],
                               'course: ': pk}
