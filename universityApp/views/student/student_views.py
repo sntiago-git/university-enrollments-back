@@ -73,5 +73,5 @@ class GetMyInfo(viewsets.GenericViewSet):
 
         # Respondemos los datos del estudiante autenticado.
         data = self.get_serializer(Student.objects.filter(
-            id=valid_data['user_id']), many=True)
+            id=valid_data['user_id']))
         return Response(data.data, status=status.HTTP_200_OK)
