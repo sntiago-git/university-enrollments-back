@@ -89,7 +89,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
-    "https://university-enrollments-front.herokuapp.com/login"
+    "https://university-enrollments-front.herokuapp.com"
 ]
 
 ROOT_URLCONF = 'universityProject.urls'
