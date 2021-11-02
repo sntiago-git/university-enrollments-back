@@ -7,13 +7,12 @@ from universityApp.models.career import Career
 class StudentSerializer(serializers.ModelSerializer):
 
     career = serializers.CharField()
-    password2 = serializers.CharField(write_only =  True)
+    password2 = serializers.CharField(write_only=True)
 
     class Meta:
         model = Student
         fields = ['id', 'password', 'password2', 'name', 'lastname',
                   'birthdate', 'gender', 'phone', 'email', 'career']
-
 
     '''
     Ya que nuestro modelo estudiante
@@ -23,31 +22,35 @@ class StudentSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
 
-        #Se extrae el valor de career (carrera del estudiante) enviado desde el request.
-        career = validated_data.pop('career') 
+        # Se extrae el valor de career (carrera del estudiante) enviado desde el request.
+        career = validated_data.pop('career')
 
-        #Validamos que las contraseñas coincidan.
+        # Validamos que las contraseñas coincidan.
         password = validated_data["password"]
-        password2 = validated_data["password2"]     
+        password2 = validated_data["password2"]
 
         if password != password2:
-            raise serializers.ValidationError({"password": "Passwords must match"})
-        validated_data.pop('password2') 
+            raise serializers.ValidationError(
+                {"password": "Passwords must match"})
+        validated_data.pop('password2')
 
-        #Se crea o se obtiene el objeto career.
-        career_instance, created = Career.objects.get_or_create(name=career) 
-        
+        # Se crea o se obtiene el objeto career.
+        career_instance, created = Career.objects.get_or_create(name=career)
+
         if(created):
-            print("La Carrera:", career_instance.__str__(), "ha sido creada en Base de datos.")
-    
-        #Se crea el nuevo objeto estudiante junto a su objeto career
-        print(validated_data)
-        student_instance = Student.objects.create(**validated_data, career=career_instance)
+            print("La Carrera:", career_instance.__str__(),
+                  "ha sido creada en Base de datos.")
 
-        print("El Estudiante:", student_instance.__str__(), "ha sido creado en Base de datos.")
+        # Se crea el nuevo objeto estudiante junto a su objeto career
+        print(validated_data)
+        student_instance = Student.objects.create(
+            **validated_data, career=career_instance)
+
+        print("El Estudiante:", student_instance.__str__(),
+              "ha sido creado en Base de datos.")
 
         return student_instance
-   
+
     ''' 
     def to_representation(self, obj):
 
