@@ -3,6 +3,10 @@ from rest_framework import serializers
 from universityApp.models.student import Student
 from universityApp.models.career import Career
 
+from django.core import exceptions
+from django.contrib.auth.hashers import make_password
+import django.contrib.auth.password_validation as validators
+
 
 class StudentSerializer(serializers.ModelSerializer):
 
@@ -13,11 +17,14 @@ class StudentSerializer(serializers.ModelSerializer):
         model = Student
         fields = ['id', 'password', 'password2', 'name', 'lastname',
                   'birthdate', 'gender', 'phone', 'email', 'career']
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
 
     '''
     Ya que nuestro modelo estudiante
     tiene una llave foranea (career)
-    se debe sobreescribir el metodo create. 
+    se debe sobreescribir el metodo create.
     '''
 
     def create(self, validated_data):
@@ -34,40 +41,62 @@ class StudentSerializer(serializers.ModelSerializer):
                 {"password": "Passwords must match"})
         validated_data.pop('password2')
 
+        validated_data["password"] = self.verify_password(
+            password)  # Validamos y encriptamos la password
+
         # Se crea o se obtiene el objeto career.
         career_instance, created = Career.objects.get_or_create(name=career)
-
-        if(created):
-            print("La Carrera:", career_instance.__str__(),
-                  "ha sido creada en Base de datos.")
 
         # Se crea el nuevo objeto estudiante junto a su objeto career
         print(validated_data)
         student_instance = Student.objects.create(
             **validated_data, career=career_instance)
 
-        print("El Estudiante:", student_instance.__str__(),
-              "ha sido creado en Base de datos.")
-
         return student_instance
 
-    ''' 
-    def to_representation(self, obj):
+    def verify_password(self, password):
 
-        student = Student.objects.get(id=obj.id)
-        career = Career.objects.get(id=obj.career)
+        errors = dict()
 
-        return {
-            'id': student.id,
-            'name': student.name,
-            'lastname': student.lastname,
-            'birthdate': student.birthdate,
-            'gender': student.gender,
-            'phone': student.phone,
-            'email': student.email,
-            'career': {
-                'id': career.id,
-                'name': career.name,
-            }
-        }
-    '''
+        try:
+            # validate the password and catch the exception
+            validators.validate_password(password=password)
+
+            some_salt = 'mMUj0DrIK6vgtdIYepkIxN'
+            password = make_password(password, some_salt)  # Encrypt
+            print(password)
+            return password
+
+        # the exception raised here is different than serializers.ValidationError
+        except exceptions.ValidationError as e:
+            errors['password'] = list(e.messages)
+
+            if errors:
+                raise serializers.ValidationError(errors)
+
+    def update(self, instance, validated_data):
+
+        # no modificable
+        id = validated_data.get('id')
+        password = validated_data.get('password')
+
+        career = validated_data.get('career')
+
+        if(id):
+            raise serializers.ValidationError(
+                {"id": "id cannot be modified"}
+            )
+
+        if(password):
+            raise serializers.ValidationError(
+                {"id": "id cannot be modified"}
+            )
+
+        if (career):
+            print(career)
+            # Se crea o se obtiene el objeto career.
+            career_instance, created = Career.objects.get_or_create(
+                name=career)
+            validated_data['career'] = career_instance
+
+        return super().update(instance, validated_data)

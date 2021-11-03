@@ -28,7 +28,7 @@ class UserManager(BaseUserManager):
         user.is_admin = True
         user.save(using=self._db)
         return user
-    
+
 
 class Student(AbstractBaseUser, PermissionsMixin):
 
@@ -43,17 +43,9 @@ class Student(AbstractBaseUser, PermissionsMixin):
     career = models.ForeignKey(
         Career, on_delete=models.CASCADE)
 
-    def save(self, **kwargs):
-        some_salt = 'mMUj0DrIK6vgtdIYepkIxN'
-        self.password = make_password(self.password, some_salt)
-        super().save(**kwargs)
-
     objects = UserManager()  # objeto de la clase usermanager, atributo de la clase user()
     USERNAME_FIELD = 'id'
 
     @property
     def is_staff(self):
         return self.is_superuser
-
-
-    

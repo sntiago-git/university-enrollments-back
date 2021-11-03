@@ -79,12 +79,25 @@ class GetMyInfo(viewsets.GenericViewSet):
 
 class UpdateStudent(viewsets.GenericViewSet):
 
-    def update(self, request):
+    serializer_class = StudentSerializer
+    permission_classes = [IsAuthenticated]
+
+    def partial_update(self, request, pk=None):
+
         token = request.META.get('HTTP_AUTHORIZATION')[7:]
         tokenBackend = TokenBackend(algorithm=settings.SIMPLE_JWT['ALGORITHM'])
         valid_data = tokenBackend.decode(token, verify=False)
 
+        pk = int(pk)
+
+        if (valid_data['user_id'] != pk):
+            stringResponse = {'detail': 'Unauthorized Request'}
+            return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
+
         # Respondemos los datos del estudiante autenticado.
-        data = self.get_serializer(Student.objects.filter(
-            id=valid_data['user_id']).first().update(data=request.data))
+        user = Student.objects.get(id=valid_data['user_id'])
+        data = self.get_serializer(user, data=request.data, partial=True)
+        data.is_valid(raise_exception=True)
+        data.save()
+
         return Response(data.data, status=status.HTTP_200_OK)
