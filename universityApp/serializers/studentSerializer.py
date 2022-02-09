@@ -76,11 +76,15 @@ class StudentSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
 
-        # no modificable
+        # no modificable !NO SIRVE, CREAR OTRO SERIALIZADOR PERSONALIZADO PARA EL UPDATE DEL MODELO.
+
+        career = validated_data.get('career')
+
+        ''' 
         id = validated_data.get('id')
         password = validated_data.get('password')
 
-        career = validated_data.get('career')
+        
 
         if(id):
             raise serializers.ValidationError(
@@ -89,8 +93,9 @@ class StudentSerializer(serializers.ModelSerializer):
 
         if(password):
             raise serializers.ValidationError(
-                {"id": "id cannot be modified"}
+                {"password": "password cannot be modified"}
             )
+       '''
 
         if (career):
             print(career)
@@ -98,5 +103,5 @@ class StudentSerializer(serializers.ModelSerializer):
             career_instance, created = Career.objects.get_or_create(
                 name=career)
             validated_data['career'] = career_instance
-
+       
         return super().update(instance, validated_data)

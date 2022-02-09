@@ -119,10 +119,10 @@ WSGI_APPLICATION = 'universityProject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd7eqdkepv1v15h',
-        'USER': 'mbccslijpdiaox',
-        'PASSWORD': 'b88b6fa4d9b37e0a794cd0b97502913381a0b01d879a3aa367c6ec75f1d51a3c',
-        'HOST': 'ec2-52-7-228-45.compute-1.amazonaws.com',
+        'NAME': 'db98la8p45qgd9',
+        'USER': 'lchqwlhvyrvyhc',
+        'PASSWORD': '0ade49f38d72e1823fecdf0b9d6309e552f90206aa7b02408704e0d9653eb733',
+        'HOST': 'ec2-34-194-171-47.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }

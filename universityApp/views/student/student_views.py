@@ -17,9 +17,9 @@ class StudentViewSet(viewsets.ModelViewSet):
 
     # Seteando permisos para cada endpoint
     permission_classes_by_action = {'create': [AllowAny],
-                                    'list': [IsAdminUser],
+                                    'list': [AllowAny],
                                     'retrieve': [IsAdminUser],
-                                    'update': [IsAdminUser],
+                                    'update': [AllowAny],
                                     'destroy': [IsAdminUser],
                                     'partial_update': [IsAdminUser], }
     # Permisos
